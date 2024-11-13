@@ -1,3 +1,4 @@
+using System.Numerics;
 using trss_lab1;
 
 namespace TestProject
@@ -101,6 +102,103 @@ namespace TestProject
             var fraction = Fraction.Parse("5/6");
             Assert.AreEqual(new Fraction(5, 6), fraction, "Fraction should be parsed as 5/6");
         }
-    }
 
+        [TestMethod]
+        public void TestFractionPlusBigInteger()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = fraction + bigInt;
+
+            Assert.AreEqual("23/4", result.ToString());
+        }
+
+        [TestMethod]
+        public void TestBigIntegerPlusFraction()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = bigInt + fraction;
+
+            Assert.AreEqual("23/4", result.ToString());
+        }
+
+        [TestMethod]
+        public void TestFractionMinusBigInteger()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = fraction - bigInt;
+
+            Assert.AreEqual("-17/4", result.ToString());
+        }
+
+        [TestMethod]
+        public void TestBigIntegerMinusFraction()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = bigInt - fraction;
+
+            Assert.AreEqual("17/4", result.ToString());
+        }
+
+        [TestMethod]
+        public void TestFractionTimesBigInteger()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = fraction * bigInt;
+
+            Assert.AreEqual("15/4", result.ToString());
+        }
+
+        [TestMethod]
+        public void TestBigIntegerTimesFraction()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = bigInt * fraction;
+
+            Assert.AreEqual("15/4", result.ToString());
+        }
+
+        [TestMethod]
+        public void TestFractionDividedByBigInteger()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = fraction / bigInt;
+
+            Assert.AreEqual("3/20", result.ToString());
+        }
+
+        [TestMethod]
+        public void TestBigIntegerDividedByFraction()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = bigInt / fraction;
+
+            Assert.AreEqual("20/3", result.ToString());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DivideByZeroException))]
+        public void TestFractionDividedByZeroBigInteger()
+        {
+            var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
+            var bigInt = new BigInteger(0);
+            var result = fraction / bigInt;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DivideByZeroException))]
+        public void TestBigIntegerDividedByZeroFraction()
+        {
+            var fraction = new Fraction(new BigInteger(0), new BigInteger(4));
+            var bigInt = new BigInteger(5);
+            var result = bigInt / fraction;
+        }
+    }
 }

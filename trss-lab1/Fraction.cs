@@ -25,16 +25,16 @@ namespace trss_lab1
 
         public static Fraction operator +(Fraction a) => a;
 
-        public static Fraction operator -(Fraction a) => new Fraction(-a.Numerator, a.Denominator);
+        public static Fraction operator -(Fraction a) => new(-a.Numerator, a.Denominator);
 
         public static Fraction operator +(Fraction a, Fraction b) =>
-            new Fraction(a.Numerator * b.Denominator + b.Numerator * a.Denominator, a.Denominator * b.Denominator);
+            new(a.Numerator * b.Denominator + b.Numerator * a.Denominator, a.Denominator * b.Denominator);
 
         public static Fraction operator -(Fraction a, Fraction b) =>
-            new Fraction(a.Numerator * b.Denominator - b.Numerator * a.Denominator, a.Denominator * b.Denominator);
+            new(a.Numerator * b.Denominator - b.Numerator * a.Denominator, a.Denominator * b.Denominator);
 
         public static Fraction operator *(Fraction a, Fraction b) =>
-            new Fraction(a.Numerator * b.Numerator, a.Denominator * b.Denominator);
+            new(a.Numerator * b.Numerator, a.Denominator * b.Denominator);
 
         public static Fraction operator /(Fraction a, Fraction b)
         {
@@ -42,6 +42,34 @@ namespace trss_lab1
                 throw new DivideByZeroException("Cannot divide by zero.");
 
             return new Fraction(a.Numerator * b.Denominator, a.Denominator * b.Numerator);
+        }
+
+        public static Fraction operator +(Fraction a, BigInteger b) => new(a.Numerator + b * a.Denominator, a.Denominator);
+
+        public static Fraction operator +(BigInteger b, Fraction a) => a + b;
+
+        public static Fraction operator -(Fraction a, BigInteger b) => new(a.Numerator - b * a.Denominator, a.Denominator);
+
+        public static Fraction operator -(BigInteger b, Fraction a) => new(b * a.Denominator - a.Numerator, a.Denominator);
+
+        public static Fraction operator *(Fraction a, BigInteger b) => new(a.Numerator * b, a.Denominator);
+
+        public static Fraction operator *(BigInteger b, Fraction a) => a * b;
+
+        public static Fraction operator /(Fraction a, BigInteger b)
+        {
+            if (b == 0)
+                throw new DivideByZeroException("Cannot divide by zero.");
+
+            return new Fraction(a.Numerator, a.Denominator * b);
+        }
+
+        public static Fraction operator /(BigInteger b, Fraction a)
+        {
+            if (a.Numerator == 0)
+                throw new DivideByZeroException("Cannot divide by zero.");
+
+            return new Fraction(b * a.Denominator, a.Numerator);
         }
 
         public override string ToString() => $"{Numerator}/{Denominator}";
@@ -55,8 +83,7 @@ namespace trss_lab1
             return new Fraction(BigInteger.Parse(parts[0]), BigInteger.Parse(parts[1]));
         }
 
-        public override bool Equals(object obj) =>
-            obj is Fraction other && Numerator == other.Numerator && Denominator == other.Denominator;
+        public override bool Equals(object? obj) => obj is Fraction other && Numerator == other.Numerator && Denominator == other.Denominator;
 
         public override int GetHashCode() => HashCode.Combine(Numerator, Denominator);
 
