@@ -189,7 +189,7 @@ namespace TestProject
         {
             var fraction = new Fraction(new BigInteger(3), new BigInteger(4));
             var bigInt = new BigInteger(0);
-            var result = fraction / bigInt;
+            _ = fraction / bigInt;
         }
 
         [TestMethod]
@@ -198,7 +198,7 @@ namespace TestProject
         {
             var fraction = new Fraction(new BigInteger(0), new BigInteger(4));
             var bigInt = new BigInteger(5);
-            var result = bigInt / fraction;
+            _ = bigInt / fraction;
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Bernoulli
     {
-        private static List<Fraction> _cache = [new Fraction(1, 1)];
+        private static readonly List<Fraction> _cache = [new Fraction(1, 1)];
 
         public static Fraction Evaluate(int n)
         {
@@ -17,7 +17,7 @@
 
             for (int m = _cache.Count; m <= n; m++)
             {
-                Fraction totalSum = new Fraction(0, 1);
+                Fraction totalSum = new(0, 1);
 
                 for (int k = 0; k < m; k++)
                 {

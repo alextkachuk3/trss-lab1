@@ -20,5 +20,15 @@ namespace trss_lab1
 
             return result;
         }
+
+        public static long Factorial(int n)
+        {
+            long result = 1;
+            for (long i = 1; i <= n; i++)
+            {
+                result *= i;
+            }
+            return result;
+        }
     }
 }

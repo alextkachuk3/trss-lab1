@@ -7,6 +7,8 @@ namespace trss_lab1
         public BigInteger Numerator { get; private set; }
         public BigInteger Denominator { get; private set; }
 
+        public static readonly Fraction Zero = new(0, 1);
+
         public Fraction(BigInteger numerator, BigInteger denominator)
         {
             if (denominator == 0)
@@ -71,6 +73,9 @@ namespace trss_lab1
 
             return new Fraction(b * a.Denominator, a.Numerator);
         }
+
+        public static implicit operator double(Fraction fraction) => 
+            fraction.Numerator >= 0 ? Math.Exp(BigInteger.Log(fraction.Numerator) - BigInteger.Log(fraction.Denominator)) : -Math.Exp(BigInteger.Log(-fraction.Numerator) - BigInteger.Log(fraction.Denominator));
 
         public override string ToString() => $"{Numerator}/{Denominator}";
 
